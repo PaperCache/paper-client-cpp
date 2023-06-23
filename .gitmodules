@@ -1,0 +1,3 @@
+[submodule "extern/paper-client-c"]
+	path = extern/paper-client-c
+	url = git@github.com:Paper-Book/paper-client-c.git
