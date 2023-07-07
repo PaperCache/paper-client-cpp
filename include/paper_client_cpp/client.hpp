@@ -37,7 +37,7 @@ public:
 		const uint32_t& = 0
 	);
 	str_response_ptr del(const std::string&);
-	str_response_ptr clear();
+	str_response_ptr wipe();
 	str_response_ptr resize(const uint64_t&);
 	str_response_ptr policy(const paper::policy&);
 	stats_response_ptr stats();

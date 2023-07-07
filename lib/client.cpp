@@ -39,9 +39,9 @@ str_response_ptr paper::client::del(const std::string& key) {
 	);
 }
 
-str_response_ptr paper::client::clear() {
+str_response_ptr paper::client::wipe() {
 	return paper::client::process_str_response(
-		paper_clear(this->c_client)
+		paper_wipe(this->c_client)
 	);
 }
 
