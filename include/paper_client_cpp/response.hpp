@@ -7,8 +7,10 @@ extern "C" {
 
 namespace paper {
 	enum policy {
+		LFU = PAPER_LFU,
 		LRU = PAPER_LRU,
 		MRU = PAPER_MRU,
+		FIFO = PAPER_FIFO,
 	};
 
 	struct stats {
