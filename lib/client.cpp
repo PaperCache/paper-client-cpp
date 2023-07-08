@@ -67,7 +67,8 @@ stats_response_ptr paper::client::stats() {
 		stats_response->stats.used_size,
 		stats_response->stats.total_gets,
 		stats_response->stats.miss_ratio,
-		paper::client::policy_from_c_policy(stats_response->stats.policy)
+		paper::client::policy_from_c_policy(stats_response->stats.policy),
+		stats_response->stats.uptime
 	};
 
 	auto response = stats_response_ptr(new paper::response<paper::stats>(

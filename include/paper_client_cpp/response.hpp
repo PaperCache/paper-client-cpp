@@ -19,6 +19,7 @@ namespace paper {
 		const uint64_t total_gets;
 		const double miss_ratio;
 		const paper::policy policy;
+		const uint64_t uptime;
 	};
 
 	template <typename T>
