@@ -16,8 +16,13 @@ namespace paper {
 	struct stats {
 		const uint64_t max_size;
 		const uint64_t used_size;
+
 		const uint64_t total_gets;
+		const uint64_t total_sets;
+		const uint64_t total_dels;
+
 		const double miss_ratio;
+
 		const paper::policy policy;
 		const uint64_t uptime;
 	};
