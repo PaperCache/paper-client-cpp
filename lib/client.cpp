@@ -95,9 +95,9 @@ str_response_ptr paper::client::process_str_response(paper_str_response* str_res
 paper_policy_t paper::client::c_policy_from_policy(const paper::policy& policy) {
 	switch (policy) {
 		case paper::policy::LFU: return PAPER_LFU;
+		case paper::policy::FIFO: return PAPER_FIFO;
 		case paper::policy::LRU: return PAPER_LRU;
 		case paper::policy::MRU: return PAPER_MRU;
-		case paper::policy::FIFO: return PAPER_FIFO;
 	}
 
 	throw std::invalid_argument("Invalid paper policy.");
@@ -106,9 +106,9 @@ paper_policy_t paper::client::c_policy_from_policy(const paper::policy& policy) 
 paper::policy paper::client::policy_from_c_policy(const paper_policy_t& c_policy) {
 	switch (c_policy) {
 		case PAPER_LFU: return paper::policy::LFU;
+		case PAPER_FIFO: return paper::policy::FIFO;
 		case PAPER_LRU: return paper::policy::LRU;
 		case PAPER_MRU: return paper::policy::MRU;
-		case PAPER_FIFO: return paper::policy::FIFO;
 	}
 
 	throw std::invalid_argument("Invalid paper policy.");
