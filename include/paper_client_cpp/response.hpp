@@ -1,6 +1,8 @@
 #ifndef _PAPER_RESPONSE_HPP_
 #define _PAPER_RESPONSE_HPP_
 
+#include <string>
+
 extern "C" {
 	#include <paper_client_c/response.h>
 }
