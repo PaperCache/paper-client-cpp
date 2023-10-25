@@ -39,6 +39,25 @@ str_response_ptr paper::client::del(const std::string& key) {
 	);
 }
 
+has_response_ptr paper::client::has(const std::string& key) {
+	paper_has_response* has_response = paper_has(this->c_client, key.c_str());
+
+	auto response = has_response_ptr(new paper::response<bool>(
+		has_response->is_ok,
+		has_response->has
+	));
+
+	paper_has_response_free(has_response);
+
+	return response;
+}
+
+str_response_ptr paper::client::peek(const std::string& key) {
+	return paper::client::process_str_response(
+		paper_peek(this->c_client, key.c_str())
+	);
+}
+
 str_response_ptr paper::client::wipe() {
 	return paper::client::process_str_response(
 		paper_wipe(this->c_client)
