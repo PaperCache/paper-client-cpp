@@ -26,7 +26,7 @@ str_response_ptr paper::client::get(const std::string& key) {
 str_response_ptr paper::client::set(
 	const std::string& key,
 	const std::string& value,
-	const uint32_t& ttl
+	const uint32_t ttl
 ) {
 	return paper::client::process_str_response(
 		paper_set(this->c_client, key.c_str(), value.c_str(), ttl)
@@ -58,13 +58,19 @@ str_response_ptr paper::client::peek(const std::string& key) {
 	);
 }
 
+str_response_ptr paper::client::ttl(const std::string& key, const uint32_t ttl) {
+	return paper::client::process_str_response(
+		paper_ttl(this->c_client, key.c_str(), ttl)
+	);
+}
+
 str_response_ptr paper::client::wipe() {
 	return paper::client::process_str_response(
 		paper_wipe(this->c_client)
 	);
 }
 
-str_response_ptr paper::client::resize(const uint64_t& size) {
+str_response_ptr paper::client::resize(const uint64_t size) {
 	return paper::client::process_str_response(
 		paper_resize(this->c_client, size)
 	);

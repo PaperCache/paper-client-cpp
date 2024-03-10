@@ -36,15 +36,16 @@ public:
 	str_response_ptr set(
 		const std::string&,
 		const std::string&,
-		const uint32_t& = 0
+		const uint32_t = 0
 	);
 	str_response_ptr del(const std::string&);
 
 	has_response_ptr has(const std::string&);
 	str_response_ptr peek(const std::string&);
+	str_response_ptr ttl(const std::string&, const uint32_t = 0);
 
 	str_response_ptr wipe();
-	str_response_ptr resize(const uint64_t&);
+	str_response_ptr resize(const uint64_t);
 
 	str_response_ptr policy(const paper::policy&);
 	stats_response_ptr stats();
