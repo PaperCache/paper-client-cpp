@@ -5,6 +5,10 @@ paper::client::~client() {
 	paper_disconnect(this->c_client);
 }
 
+paper_client* paper::client::get_c_client() {
+	return this->c_client;
+}
+
 str_response_ptr paper::client::ping() {
 	return paper::client::process_str_response(
 		paper_ping(this->c_client)

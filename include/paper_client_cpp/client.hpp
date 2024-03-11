@@ -22,12 +22,16 @@ private:
 	paper_client* c_client;
 
 public:
+	client(paper_client* c_client) : c_client(c_client) {}
+
 	client(
 		const std::string& host = "127.0.0.1",
 		const int port = 3145
 	) : c_client(paper_connect(host.c_str(), port)) {}
 
 	~client();
+
+	paper_client* get_c_client();
 
 	str_response_ptr ping();
 	str_response_ptr version();
