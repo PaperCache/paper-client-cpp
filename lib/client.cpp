@@ -48,7 +48,8 @@ has_response_ptr paper::client::has(const std::string& key) {
 
 	auto response = has_response_ptr(new paper::response<bool>(
 		has_response->is_ok,
-		has_response->has
+		has_response->has,
+		has_response->err_data
 	));
 
 	paper_has_response_free(has_response);
@@ -66,6 +67,20 @@ str_response_ptr paper::client::ttl(const std::string& key, const uint32_t ttl) 
 	return paper::client::process_str_response(
 		paper_ttl(this->c_client, key.c_str(), ttl)
 	);
+}
+
+size_response_ptr paper::client::size(const std::string& key) {
+	paper_size_response* size_response = paper_size(this->c_client, key.c_str());
+
+	auto response = size_response_ptr(new paper::response<uint64_t>(
+		size_response->is_ok,
+		size_response->size,
+		size_response->err_data
+	));
+
+	paper_size_response_free(size_response);
+
+	return response;
 }
 
 str_response_ptr paper::client::wipe() {
@@ -104,7 +119,8 @@ stats_response_ptr paper::client::stats() {
 
 	auto response = stats_response_ptr(new paper::response<paper::stats>(
 		stats_response->is_ok,
-		stats
+		stats,
+		stats_response->err_data
 	));
 
 	paper_stats_response_free(stats_response);

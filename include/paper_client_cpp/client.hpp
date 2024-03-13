@@ -11,6 +11,7 @@ extern "C" {
 
 typedef std::unique_ptr<paper::response<std::string>> str_response_ptr;
 typedef std::unique_ptr<paper::response<bool>> has_response_ptr;
+typedef std::unique_ptr<paper::response<uint64_t>> size_response_ptr;
 typedef std::unique_ptr<paper::response<paper::stats>> stats_response_ptr;
 
 namespace paper {
@@ -47,6 +48,7 @@ public:
 	has_response_ptr has(const std::string&);
 	str_response_ptr peek(const std::string&);
 	str_response_ptr ttl(const std::string&, const uint32_t = 0);
+	size_response_ptr size(const std::string&);
 
 	str_response_ptr wipe();
 	str_response_ptr resize(const uint64_t);

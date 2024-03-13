@@ -1,4 +1,3 @@
-#include <string.h>
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_all.hpp>
 #include <paper_client_cpp/client.hpp>
@@ -27,5 +26,5 @@ TEST_CASE("should set the cache's policy", "[command::policy]") {
 
 paper::policy get_current_policy(paper::client& client) {
 	auto response = client.stats();
-	return response->data.policy;
+	return response->stats.policy;
 }

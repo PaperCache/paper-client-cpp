@@ -1,4 +1,3 @@
-#include <string.h>
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_all.hpp>
 #include <paper_client_cpp/client.hpp>
@@ -27,5 +26,5 @@ TEST_CASE("should resize the cache", "[command::resize]") {
 
 uint64_t get_current_size(paper::client& client) {
 	auto response = client.stats();
-	return response->data.max_size;
+	return response->stats.max_size;
 }

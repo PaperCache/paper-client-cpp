@@ -38,14 +38,49 @@ namespace paper {
 			is_ok(is_ok), data(data) {}
 	};
 
-	struct str_response {
+	template <>
+	struct response<bool> {
 		bool is_ok;
-		std::string data;
+		bool data;
+		std::string err_data;
+
+		response(bool is_ok, bool data, char* err_data) :
+			is_ok(is_ok), data(data)
+		{
+			if (err_data != NULL) {
+				this->err_data = std::string(err_data);
+			}
+		}
 	};
 
-	struct stats_response {
+	template <>
+	struct response<uint64_t> {
+		bool is_ok;
+		uint64_t data;
+		std::string err_data;
+
+		response(bool is_ok, uint64_t data, char* err_data) :
+			is_ok(is_ok), data(data)
+		{
+			if (err_data != NULL) {
+				this->err_data = std::string(err_data);
+			}
+		}
+	};
+
+	template <>
+	struct response<paper::stats> {
 		bool is_ok;
 		paper::stats stats;
+		std::string err_data;
+
+		response(bool is_ok, paper::stats stats, char* err_data) :
+			is_ok(is_ok), stats(stats)
+		{
+			if (err_data != NULL) {
+				this->err_data = std::string(err_data);
+			}
+		}
 	};
 };
 
