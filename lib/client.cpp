@@ -21,6 +21,12 @@ str_response_ptr paper::client::version() {
 	);
 }
 
+str_response_ptr paper::client::auth(const std::string& key) {
+	return paper::client::process_str_response(
+		paper_auth(this->c_client, key.c_str())
+	);
+}
+
 str_response_ptr paper::client::get(const std::string& key) {
 	return paper::client::process_str_response(
 		paper_get(this->c_client, key.c_str())

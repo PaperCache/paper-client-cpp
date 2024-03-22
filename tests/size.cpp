@@ -4,6 +4,8 @@
 
 TEST_CASE("should get an object's size", "[command::size]") {
 	paper::client client ("127.0.0.1", 3145);
+
+	client.auth("auth_token");
 	client.wipe();
 
 	SECTION("a key which exists should return its size") {

@@ -9,6 +9,8 @@ TEST_CASE("should set the cache's policy", "[command::policy]") {
 	const paper::policy UPDATED_POLICY = paper::policy::LRU;
 
 	paper::client client ("127.0.0.1", 3145);
+
+	client.auth("auth_token");
 	client.wipe();
 
 	auto initial = client.policy(INITIAL_POLICY);

@@ -25,6 +25,8 @@ public:
 
 	~pool();
 
+	void auth(const std::string&);
+
 	paper::client* lock_client();
 	void unlock_client(paper::client* client);
 };

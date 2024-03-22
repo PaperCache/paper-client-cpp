@@ -6,6 +6,8 @@
 
 TEST_CASE("should set an object to the cache", "[command::set]") {
 	paper::client client ("127.0.0.1", 3145);
+
+	client.auth("auth_token");
 	client.wipe();
 
 	SECTION("a TTL of zero should return ok") {

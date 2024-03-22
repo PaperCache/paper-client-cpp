@@ -37,6 +37,8 @@ public:
 	str_response_ptr ping();
 	str_response_ptr version();
 
+	str_response_ptr auth(const std::string&);
+
 	str_response_ptr get(const std::string&);
 	str_response_ptr set(
 		const std::string&,

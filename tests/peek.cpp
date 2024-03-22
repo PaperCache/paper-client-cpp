@@ -4,6 +4,8 @@
 
 TEST_CASE("should peek an object from the cache", "[command::peek]") {
 	paper::client client ("127.0.0.1", 3145);
+
+	client.auth("auth_token");
 	client.wipe();
 
 	SECTION("a key which exists should return ok") {
