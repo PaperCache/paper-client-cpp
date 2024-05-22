@@ -4,7 +4,7 @@
 #include <paper_client_cpp/client.hpp>
 
 TEST_CASE("should wipe all data in the cache", "[command::wipe]") {
-	paper::client client ("127.0.0.1", 3145);
+	paper::client client ("paper://127.0.0.1:3145");
 
 	client.auth("auth_token");
 	client.wipe();

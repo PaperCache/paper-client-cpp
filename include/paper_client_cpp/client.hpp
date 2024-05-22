@@ -25,10 +25,8 @@ private:
 public:
 	client(paper_client* c_client) : c_client(c_client) {}
 
-	client(
-		const std::string& host = "127.0.0.1",
-		const int port = 3145
-	) : c_client(paper_connect(host.c_str(), port)) {}
+	client(const std::string& paper_addr = "paper://127.0.0.1:3145")
+		: c_client(paper_connect(paper_addr.c_str())) {}
 
 	~client();
 

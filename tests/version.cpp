@@ -3,7 +3,7 @@
 #include <paper_client_cpp/client.hpp>
 
 TEST_CASE("should get the cache's version", "[command::version]") {
-	paper::client client ("127.0.0.1", 3145);
+	paper::client client ("paper://127.0.0.1:3145");
 	auto response = client.version();
 
 	REQUIRE(response->is_ok);

@@ -5,7 +5,7 @@
 bool can_set(paper::pool&);
 
 TEST_CASE("should use a client", "[pool]") {
-	paper::pool pool ("127.0.0.1", 3145, 2);
+	paper::pool pool ("paper://127.0.0.1:3145", 2);
 
 	auto client = pool.lock_client();
 	auto response = client->ping();
@@ -16,7 +16,7 @@ TEST_CASE("should use a client", "[pool]") {
 }
 
 TEST_CASE("should authorize all clients", "[pool::auth]") {
-	paper::pool pool ("127.0.0.1", 3145, 2);
+	paper::pool pool ("paper://127.0.0.1:3145", 2);
 
 	REQUIRE(!can_set(pool));
 	pool.auth("auth_token");

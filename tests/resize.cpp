@@ -8,7 +8,7 @@ TEST_CASE("should resize the cache", "[command::resize]") {
 	const uint64_t INITIAL_SIZE = 10485760;
 	const uint64_t UPDATED_SIZE = 20971520;
 
-	paper::client client ("127.0.0.1", 3145);
+	paper::client client ("paper://127.0.0.1:3145");
 
 	client.auth("auth_token");
 	client.wipe();

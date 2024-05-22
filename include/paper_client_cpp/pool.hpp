@@ -18,10 +18,9 @@ private:
 
 public:
 	pool(
-		const std::string& host = "127.0.0.1",
-		const int port = 3145,
+		const std::string& paper_addr = "paper://127.0.0.1:3145",
 		const int size = 2
-	): c_pool(paper_pool_connect(host.c_str(), port, size)) {}
+	): c_pool(paper_pool_connect(paper_addr.c_str(), size)) {}
 
 	~pool();
 

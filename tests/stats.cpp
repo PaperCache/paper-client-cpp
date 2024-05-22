@@ -3,7 +3,7 @@
 #include <paper_client_cpp/client.hpp>
 
 TEST_CASE("should get the cache's stats", "[command::stats]") {
-	paper::client client ("127.0.0.1", 3145);
+	paper::client client ("paper://127.0.0.1:3145");
 
 	client.auth("auth_token");
 	client.wipe();

@@ -3,7 +3,7 @@
 #include <paper_client_cpp/client.hpp>
 
 TEST_CASE("should not authorize with incorrect token", "[command::auth]") {
-	paper::client client ("127.0.0.1", 3145);
+	paper::client client ("paper://127.0.0.1:3145");
 
 	REQUIRE(!client.set("key", "value")->is_ok);
 
@@ -14,7 +14,7 @@ TEST_CASE("should not authorize with incorrect token", "[command::auth]") {
 }
 
 TEST_CASE("should authorize with correct token", "[command::auth]") {
-	paper::client client ("127.0.0.1", 3145);
+	paper::client client ("paper://127.0.0.1:3145");
 
 	REQUIRE(!client.set("key", "value")->is_ok);
 
