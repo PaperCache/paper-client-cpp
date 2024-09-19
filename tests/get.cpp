@@ -20,6 +20,6 @@ TEST_CASE("should get an object from the cache", "[command::get]") {
 		auto response = client.get("key");
 
 		REQUIRE(!response->is_ok);
-		REQUIRE(!response->data.empty());
+		REQUIRE(response->error == paper::error::KEY_NOT_FOUND);
 	}
 }

@@ -16,13 +16,11 @@ TEST_CASE("should set the cache's policy", "[command::policy]") {
 	auto initial = client.policy(INITIAL_POLICY);
 
 	REQUIRE(initial->is_ok);
-	REQUIRE(initial->data == "done");
 	REQUIRE(get_current_policy(client) == INITIAL_POLICY);
 
 	auto updated = client.policy(UPDATED_POLICY);
 
 	REQUIRE(updated->is_ok);
-	REQUIRE(updated->data == "done");
 	REQUIRE(get_current_policy(client) == UPDATED_POLICY);
 }
 

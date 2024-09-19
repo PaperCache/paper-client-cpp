@@ -12,23 +12,18 @@ TEST_CASE("should set an object to the cache", "[command::set]") {
 
 	SECTION("a TTL of zero should return ok") {
 		auto response = client.set("key", "value", 0);
-
 		REQUIRE(response->is_ok);
-		REQUIRE(response->data == "done");
 	}
 
 	SECTION("a non-zero TTL should return ok") {
 		auto response = client.set("key", "value", 1);
-
 		REQUIRE(response->is_ok);
-		REQUIRE(response->data == "done");
 	}
 
 	SECTION("a non-zero TTL should be correctly set") {
 		auto response = client.set("key", "value", 1);
 
 		REQUIRE(response->is_ok);
-		REQUIRE(response->data == "done");
 
 		auto got = client.get("key");
 
@@ -40,6 +35,6 @@ TEST_CASE("should set an object to the cache", "[command::set]") {
 		auto expired = client.get("key");
 
 		REQUIRE(!expired->is_ok);
-		REQUIRE(!expired->data.empty());
+		REQUIRE(expired->error == paper::error::KEY_NOT_FOUND);
 	}
 }

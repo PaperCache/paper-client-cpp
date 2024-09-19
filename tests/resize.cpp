@@ -16,13 +16,11 @@ TEST_CASE("should resize the cache", "[command::resize]") {
 	auto initial = client.resize(INITIAL_SIZE);
 
 	REQUIRE(initial->is_ok);
-	REQUIRE(initial->data == "done");
 	REQUIRE(get_current_size(client) == INITIAL_SIZE);
 
 	auto updated = client.resize(UPDATED_SIZE);
 
 	REQUIRE(updated->is_ok);
-	REQUIRE(updated->data == "done");
 	REQUIRE(get_current_size(client) == UPDATED_SIZE);
 }
 

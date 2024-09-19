@@ -20,6 +20,6 @@ TEST_CASE("should get an object's size", "[command::size]") {
 		auto response = client.size("key");
 
 		REQUIRE(!response->is_ok);
-		REQUIRE(!response->err_data.empty());
+		REQUIRE(response->error == paper::error::KEY_NOT_FOUND);
 	}
 }

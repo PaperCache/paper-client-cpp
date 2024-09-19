@@ -3,16 +3,18 @@
 
 #include <string>
 #include <memory>
+#include <stdexcept>
 #include <paper_client_cpp/response.hpp>
 
 extern "C" {
 	#include <paper_client_c/client.h>
 }
 
-typedef std::unique_ptr<paper::response<std::string>> str_response_ptr;
-typedef std::unique_ptr<paper::response<bool>> has_response_ptr;
-typedef std::unique_ptr<paper::response<uint64_t>> size_response_ptr;
-typedef std::unique_ptr<paper::response<paper::stats>> stats_response_ptr;
+typedef std::unique_ptr<paper::response> response_ptr;
+typedef std::unique_ptr<paper::data_response<std::string>> str_response_ptr;
+typedef std::unique_ptr<paper::data_response<bool>> has_response_ptr;
+typedef std::unique_ptr<paper::data_response<uint64_t>> size_response_ptr;
+typedef std::unique_ptr<paper::data_response<paper::stats>> stats_response_ptr;
 
 namespace paper {
 	class client;
@@ -25,8 +27,15 @@ private:
 public:
 	client(paper_client* c_client) : c_client(c_client) {}
 
-	client(const std::string& paper_addr = "paper://127.0.0.1:3145")
-		: c_client(paper_connect(paper_addr.c_str())) {}
+	client(const std::string& paper_addr = "paper://127.0.0.1:3145") {
+		paper_client* client = paper_connect(paper_addr.c_str());
+
+		if (client == NULL) {
+			throw std::runtime_error("Could not connect to PaperCache.");
+		}
+
+		this->c_client = client;
+	}
 
 	~client();
 
@@ -35,32 +44,35 @@ public:
 	str_response_ptr ping();
 	str_response_ptr version();
 
-	str_response_ptr auth(const std::string&);
+	response_ptr auth(const std::string&);
 
 	str_response_ptr get(const std::string&);
-	str_response_ptr set(
+	response_ptr set(
 		const std::string&,
 		const std::string&,
 		const uint32_t = 0
 	);
-	str_response_ptr del(const std::string&);
+	response_ptr del(const std::string&);
 
 	has_response_ptr has(const std::string&);
 	str_response_ptr peek(const std::string&);
-	str_response_ptr ttl(const std::string&, const uint32_t = 0);
+	response_ptr ttl(const std::string&, const uint32_t = 0);
 	size_response_ptr size(const std::string&);
 
-	str_response_ptr wipe();
-	str_response_ptr resize(const uint64_t);
+	response_ptr wipe();
+	response_ptr resize(const uint64_t);
 
-	str_response_ptr policy(const paper::policy&);
+	response_ptr policy(const paper::policy&);
 	stats_response_ptr stats();
 
 private:
+	static response_ptr process_response(paper_response*);
 	static str_response_ptr process_str_response(paper_str_response*);
 
 	static paper_policy_t c_policy_from_policy(const paper::policy&);
 	static paper::policy policy_from_c_policy(const paper_policy_t&);
+
+	static paper::error error_from_c_error(const paper_error_t&);
 };
 
 #endif

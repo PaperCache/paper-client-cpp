@@ -20,6 +20,6 @@ TEST_CASE("should peek an object from the cache", "[command::peek]") {
 		auto response = client.peek("key");
 
 		REQUIRE(!response->is_ok);
-		REQUIRE(!response->data.empty());
+		REQUIRE(response->error == paper::error::KEY_NOT_FOUND);
 	}
 }
