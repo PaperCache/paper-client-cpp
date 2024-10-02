@@ -79,7 +79,7 @@ response_ptr paper::client::ttl(const std::string& key, const uint32_t ttl) {
 size_response_ptr paper::client::size(const std::string& key) {
 	paper_size_response* size_response = paper_size(this->c_client, key.c_str());
 
-	auto response = size_response_ptr(new paper::data_response<uint64_t>(
+	auto response = size_response_ptr(new paper::data_response<uint32_t>(
 		size_response->is_ok,
 		size_response->size,
 		paper::client::error_from_c_error(size_response->error)

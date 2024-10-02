@@ -13,7 +13,7 @@ extern "C" {
 typedef std::unique_ptr<paper::response> response_ptr;
 typedef std::unique_ptr<paper::data_response<std::string>> str_response_ptr;
 typedef std::unique_ptr<paper::data_response<bool>> has_response_ptr;
-typedef std::unique_ptr<paper::data_response<uint64_t>> size_response_ptr;
+typedef std::unique_ptr<paper::data_response<uint32_t>> size_response_ptr;
 typedef std::unique_ptr<paper::data_response<paper::stats>> stats_response_ptr;
 
 namespace paper {

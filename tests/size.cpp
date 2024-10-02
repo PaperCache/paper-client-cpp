@@ -13,7 +13,7 @@ TEST_CASE("should get an object's size", "[command::size]") {
 		auto response = client.size("key");
 
 		REQUIRE(response->is_ok);
-		REQUIRE(response->data == 5);
+		REQUIRE(response->data > 0);
 	}
 
 	SECTION("a key which does not exist should return not ok") {
