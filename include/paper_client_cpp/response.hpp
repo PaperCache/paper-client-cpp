@@ -1,8 +1,8 @@
 #ifndef _PAPER_RESPONSE_HPP_
 #define _PAPER_RESPONSE_HPP_
 
+#include <vector>
 #include <paper_client_cpp/error.hpp>
-#include <paper_client_cpp/policy.hpp>
 
 extern "C" {
 	#include <paper_client_c/response.h>
@@ -12,6 +12,7 @@ namespace paper {
 	struct stats {
 		const uint64_t max_size;
 		const uint64_t used_size;
+		const uint64_t num_objects;
 
 		const uint64_t total_gets;
 		const uint64_t total_sets;
@@ -19,7 +20,10 @@ namespace paper {
 
 		const double miss_ratio;
 
-		const paper::policy policy;
+		const std::vector<std::string> policies;
+		const std::string policy;
+		const bool is_auto_policy;
+
 		const uint64_t uptime;
 	};
 

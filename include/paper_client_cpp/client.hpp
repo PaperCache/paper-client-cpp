@@ -62,15 +62,12 @@ public:
 	response_ptr wipe();
 	response_ptr resize(const uint64_t);
 
-	response_ptr policy(const paper::policy&);
+	response_ptr policy(const std::string&);
 	stats_response_ptr stats();
 
 private:
 	static response_ptr process_response(paper_response*);
 	static str_response_ptr process_str_response(paper_str_response*);
-
-	static paper_policy_t c_policy_from_policy(const paper::policy&);
-	static paper::policy policy_from_c_policy(const paper_policy_t&);
 
 	static paper::error error_from_c_error(const paper_error_t&);
 };

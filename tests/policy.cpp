@@ -2,11 +2,11 @@
 #include <catch2/matchers/catch_matchers_all.hpp>
 #include <paper_client_cpp/client.hpp>
 
-paper::policy get_current_policy(paper::client&);
+std::string get_current_policy(paper::client&);
 
 TEST_CASE("should set the cache's policy", "[command::policy]") {
-	const paper::policy INITIAL_POLICY = paper::policy::LFU;
-	const paper::policy UPDATED_POLICY = paper::policy::LRU;
+	const std::string INITIAL_POLICY = std::string("lfu");
+	const std::string UPDATED_POLICY = std::string("lru");
 
 	paper::client client ("paper://127.0.0.1:3145");
 
@@ -24,7 +24,7 @@ TEST_CASE("should set the cache's policy", "[command::policy]") {
 	REQUIRE(get_current_policy(client) == UPDATED_POLICY);
 }
 
-paper::policy get_current_policy(paper::client& client) {
+std::string get_current_policy(paper::client& client) {
 	auto response = client.stats();
 	return response->stats.policy;
 }

@@ -102,25 +102,35 @@ response_ptr paper::client::resize(const uint64_t size) {
 	);
 }
 
-response_ptr paper::client::policy(const paper::policy& policy) {
-	auto c_policy = paper::client::c_policy_from_policy(policy);
-
+response_ptr paper::client::policy(const std::string& policy) {
 	return paper::client::process_response(
-		paper_policy(this->c_client, c_policy)
+		paper_policy(this->c_client, policy.c_str())
 	);
 }
 
 stats_response_ptr paper::client::stats() {
 	paper_stats_response* stats_response = paper_stats(this->c_client);
+	std::vector<std::string> policies;
+
+	for (uint32_t i=0; i<stats_response->stats.num_policies; i++) {
+		policies.push_back(std::string(stats_response->stats.policies[i]));
+	}
 
 	paper::stats stats {
 		stats_response->stats.max_size,
 		stats_response->stats.used_size,
+		stats_response->stats.num_objects,
+
 		stats_response->stats.total_gets,
 		stats_response->stats.total_sets,
 		stats_response->stats.total_dels,
+
 		stats_response->stats.miss_ratio,
-		paper::client::policy_from_c_policy(stats_response->stats.policy),
+
+		policies,
+		std::string(stats_response->stats.policy),
+		stats_response->stats.is_auto_policy,
+
 		stats_response->stats.uptime
 	};
 
@@ -156,28 +166,6 @@ str_response_ptr paper::client::process_str_response(paper_str_response* paper_s
 	paper_str_response_free(paper_str_response);
 
 	return response;
-}
-
-paper_policy_t paper::client::c_policy_from_policy(const paper::policy& policy) {
-	switch (policy) {
-		case paper::policy::LFU: return PAPER_LFU;
-		case paper::policy::FIFO: return PAPER_FIFO;
-		case paper::policy::LRU: return PAPER_LRU;
-		case paper::policy::MRU: return PAPER_MRU;
-	}
-
-	throw std::invalid_argument("Invalid paper policy.");
-}
-
-paper::policy paper::client::policy_from_c_policy(const paper_policy_t& c_policy) {
-	switch (c_policy) {
-		case PAPER_LFU: return paper::policy::LFU;
-		case PAPER_FIFO: return paper::policy::FIFO;
-		case PAPER_LRU: return paper::policy::LRU;
-		case PAPER_MRU: return paper::policy::MRU;
-	}
-
-	throw std::invalid_argument("Invalid paper policy.");
 }
 
 paper::error paper::client::error_from_c_error(const paper_error_t& error) {
