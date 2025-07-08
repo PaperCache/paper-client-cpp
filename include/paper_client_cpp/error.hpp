@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) Kia Shakiba
+ *
+ * This source code is licensed under the GNU AGPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 #ifndef _PAPER_ERROR_HPP_
 #define _PAPER_ERROR_HPP_
 
@@ -19,6 +26,9 @@ namespace paper {
 		EXCEEDING_VALUE_SIZE = PAPER_EXCEEDING_VALUE_SIZE,
 
 		ZERO_CACHE_SIZE = PAPER_ZERO_CACHE_SIZE,
+
+		UNCONFIGURED_POLICY = PAPER_UNCONFIGURED_POLICY,
+		INVALID_POLICY = PAPER_INVALID_POLICY,
 	};
 }
 

@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) Kia Shakiba
+ *
+ * This source code is licensed under the GNU AGPLv3 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 #include <stdexcept>
 #include <paper_client_cpp/response.hpp>
 #include <paper_client_cpp/client.hpp>
@@ -180,6 +187,9 @@ paper::error paper::client::error_from_c_error(const paper_error_t& error) {
 		case PAPER_EXCEEDING_VALUE_SIZE: return paper::error::EXCEEDING_VALUE_SIZE;
 
 		case PAPER_ZERO_CACHE_SIZE: return paper::error::ZERO_CACHE_SIZE;
+
+		case PAPER_UNCONFIGURED_POLICY: return paper::error::UNCONFIGURED_POLICY;
+		case PAPER_INVALID_POLICY: return paper::error::INVALID_POLICY;
 
 		default: return paper::error::INTERNAL;
 	}
