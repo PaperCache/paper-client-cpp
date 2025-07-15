@@ -9,13 +9,13 @@
 #include <catch2/matchers/catch_matchers_all.hpp>
 #include <paper_client_cpp/client.hpp>
 
-TEST_CASE("should get the cache's stats", "[command::stats]") {
+TEST_CASE("should get the cache's status", "[command::status]") {
 	paper::client client ("paper://127.0.0.1:3145");
 
 	client.auth("auth_token");
 	client.wipe();
 
-	auto response = client.stats();
+	auto response = client.status();
 
 	REQUIRE(response->is_ok);
 }

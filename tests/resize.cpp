@@ -32,6 +32,6 @@ TEST_CASE("should resize the cache", "[command::resize]") {
 }
 
 uint64_t get_current_size(paper::client& client) {
-	auto response = client.stats();
-	return response->stats.max_size;
+	auto response = client.status();
+	return response->status.max_size;
 }

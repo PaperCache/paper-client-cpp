@@ -32,6 +32,6 @@ TEST_CASE("should set the cache's policy", "[command::policy]") {
 }
 
 std::string get_current_policy(paper::client& client) {
-	auto response = client.stats();
-	return response->stats.policy;
+	auto response = client.status();
+	return response->status.policy;
 }

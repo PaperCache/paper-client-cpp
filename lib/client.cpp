@@ -115,39 +115,44 @@ response_ptr paper::client::policy(const std::string& policy) {
 	);
 }
 
-stats_response_ptr paper::client::stats() {
-	paper_stats_response* stats_response = paper_stats(this->c_client);
+status_response_ptr paper::client::status() {
+	paper_status_response* status_response = paper_status(this->c_client);
 	std::vector<std::string> policies;
 
-	for (uint32_t i=0; i<stats_response->stats.num_policies; i++) {
-		policies.push_back(std::string(stats_response->stats.policies[i]));
+	for (uint32_t i=0; i<status_response->status.num_policies; i++) {
+		policies.push_back(std::string(status_response->status.policies[i]));
 	}
 
-	paper::stats stats {
-		stats_response->stats.max_size,
-		stats_response->stats.used_size,
-		stats_response->stats.num_objects,
+	paper::status status {
+		status_response->status.pid,
 
-		stats_response->stats.total_gets,
-		stats_response->stats.total_sets,
-		stats_response->stats.total_dels,
+		status_response->status.max_size,
+		status_response->status.used_size,
+		status_response->status.num_objects,
 
-		stats_response->stats.miss_ratio,
+		status_response->status.rss,
+		status_response->status.hwm,
+
+		status_response->status.total_gets,
+		status_response->status.total_sets,
+		status_response->status.total_dels,
+
+		status_response->status.miss_ratio,
 
 		policies,
-		std::string(stats_response->stats.policy),
-		stats_response->stats.is_auto_policy,
+		std::string(status_response->status.policy),
+		status_response->status.is_auto_policy,
 
-		stats_response->stats.uptime
+		status_response->status.uptime
 	};
 
-	auto response = stats_response_ptr(new paper::data_response<paper::stats>(
-		stats_response->is_ok,
-		stats,
-		paper::client::error_from_c_error(stats_response->error)
+	auto response = status_response_ptr(new paper::data_response<paper::status>(
+		status_response->is_ok,
+		status,
+		paper::client::error_from_c_error(status_response->error)
 	));
 
-	paper_stats_response_free(stats_response);
+	paper_status_response_free(status_response);
 
 	return response;
 }

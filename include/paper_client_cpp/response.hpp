@@ -16,10 +16,15 @@ extern "C" {
 }
 
 namespace paper {
-	struct stats {
+	struct status {
+		const uint32_t pid;
+
 		const uint64_t max_size;
 		const uint64_t used_size;
 		const uint64_t num_objects;
+
+		const uint64_t rss;
+		const uint64_t hwm;
 
 		const uint64_t total_gets;
 		const uint64_t total_sets;
@@ -73,13 +78,13 @@ namespace paper {
 	};
 
 	template <>
-	struct data_response<paper::stats> {
+	struct data_response<paper::status> {
 		bool is_ok;
-		paper::stats stats;
+		paper::status status;
 		paper::error error;
 
-		data_response(bool is_ok, paper::stats stats, paper::error error) :
-			is_ok(is_ok), stats(stats), error(error) {}
+		data_response(bool is_ok, paper::status status, paper::error error) :
+			is_ok(is_ok), status(status), error(error) {}
 	};
 };
 
